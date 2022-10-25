@@ -126,8 +126,6 @@ function Register() {
                                           {values.showPass ? (
                                              <VisibilityOffIcon />
                                           ) : (
-
-                                             
                                              <VisibilityIcon />
                                           )}
                                        </IconButton>
