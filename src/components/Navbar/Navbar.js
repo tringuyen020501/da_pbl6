@@ -15,7 +15,7 @@ function Navbar() {
             {user ? (
                <>
                   <p className="navbar-user">
-                     Hi, <span> {user} </span>{" "}
+                     Hi, <span>  </span>{" "}
                   </p>
                   <Link to="/logout" className="navbar-logout">
                      {" "}
