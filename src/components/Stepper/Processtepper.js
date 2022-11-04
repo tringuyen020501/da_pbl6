@@ -6,16 +6,15 @@ import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Converting from "../Users/Converting.js";
-import Register from "../Register/Register.js";
 import Getinfo from "../Getinfo/Getinfo.js";
 import { useContext } from "react";
 import { AppContext } from "../../App.js";
 
 function Processstepper() {
-   const steps = ["Upload Images", "Review Information", "Save Information"];
+   const steps = ["Upload Images", "Review Information and Save Information "];
    const [activeStep, setActiveStep] = useContext(AppContext);
 
-   const pages = [<Converting />, <Getinfo />, <Register />];
+   const pages = [<Converting />, <Getinfo />];
 
    const [skipped, setSkipped] = React.useState(new Set());
 

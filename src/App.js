@@ -5,7 +5,7 @@ import Login from "./components/Login/Login.js";
 import Register from "./components/Register/Register.js";
 import Navbar from "./components/Navbar/Navbar";
 import Loading from "./components/Loading/Loading";
-import Processstepper from "./components/Stepper/Processstepper";
+import Processtepper from "./components/Stepper/Processtepper";
 import { createContext, useState } from "react";
 import Getinfo from "./components/Getinfo/Getinfo";
 
@@ -36,9 +36,8 @@ function App() {
                <Navbar />
                <br />
                <Routes>
-                  <Route path="/" element={<Processstepper />}></Route>
+                  <Route path="/" element={<Processtepper />}></Route>
                   <Route path="/info" element={<Getinfo />}></Route>
-
                   <Route path="/Converting" element={<Converting />}></Route>
                   <Route path="/login" element={<Login />}></Route>
                   <Route path="/register" element={<Register />}></Route>

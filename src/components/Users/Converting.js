@@ -10,7 +10,7 @@ function Converting() {
    const [text, setText] = React.useState("");
    const [progress, setProgress] = React.useState(0);
 
-   const [setActiveStep] = useContext(AppContext);
+   const [, setActiveStep] = useContext(AppContext);
    const [, setUser] = useContext(UserContext);
 
    const handleSubmit = () => {
@@ -47,11 +47,6 @@ function Converting() {
       for (let [index, file] of Object.entries(image)) {
          formdata.append(direc[index], file);
       }
-      /**
-       * const blob = new Blob([JSON.stringify(obj, null, 2)], {
-  type: "application/json",
-});
-       */
 
       axios({
          url: "http://pi.tuongnh.tech:8000/extract",
@@ -106,12 +101,12 @@ function Converting() {
                         className="btn btn-primary mt-5"
                         value="Upload"
                      />
-                     <input
+                     {/* <input
                         type="button"
                         onClick={handleSubmit}
                         className="btn btn-primary mt-5"
                         value="Convert"
-                     />
+                     /> */}
                   </>
                )}
                {!isLoading && text && (
