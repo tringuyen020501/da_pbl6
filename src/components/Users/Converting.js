@@ -1,5 +1,7 @@
-import React from "react";
+import axios from "axios";
+import React, { useContext } from "react";
 import Tesseract from "tesseract.js";
+import { AppContext, UserContext } from "../../App";
 import "../../index.css";
 
 function Converting() {
@@ -7,6 +9,9 @@ function Converting() {
    const [image, setImage] = React.useState("");
    const [text, setText] = React.useState("");
    const [progress, setProgress] = React.useState(0);
+
+   const [setActiveStep] = useContext(AppContext);
+   const [, setUser] = useContext(UserContext);
 
    const handleSubmit = () => {
       setIsLoading(true);
@@ -27,6 +32,44 @@ function Converting() {
             setIsLoading(false);
          });
    };
+   const handleUpload = (e) => {
+      e.preventDefault();
+
+      const formdata = new FormData();
+
+      const direc = [
+         "img_front",
+         "img_back",
+         "img_inner_left",
+         "img_inner_right",
+      ];
+      // [index,file] : destruturing
+      for (let [index, file] of Object.entries(image)) {
+         formdata.append(direc[index], file);
+      }
+      /**
+       * const blob = new Blob([JSON.stringify(obj, null, 2)], {
+  type: "application/json",
+});
+       */
+
+      axios({
+         url: "http://pi.tuongnh.tech:8000/extract",
+         method: "post",
+         headers: {
+            "Content-Type": "multipart/form-data",
+         },
+         data: formdata,
+      }).then(
+         (res) => {
+            setUser(res.data);
+            setActiveStep((c) => c + 1);
+         },
+         (err) => {
+            console.log(err);
+         }
+      );
+   };
 
    return (
       <div className="container" style={{ height: "100vh" }}>
@@ -45,19 +88,23 @@ function Converting() {
                         {progress}%{" "}
                      </progress>{" "}
                      {progress} %
-                     {/* <p className="text-center py-0 my-0">
-                        Converting: {progress} %
-                     </p> */}
                   </>
                )}
                {!isLoading && !text && (
                   <>
                      <input
                         type="file"
-                        onChange={(e) =>
-                           setImage(URL.createObjectURL(e.target.files[0]))
-                        }
+                        multiple
+                        onChange={(e) => {
+                           setImage(e.target.files);
+                        }}
                         className="form-control mt-5 mb-2"
+                     />
+                     <input
+                        type="button"
+                        onClick={handleUpload}
+                        className="btn btn-primary mt-5"
+                        value="Upload"
                      />
                      <input
                         type="button"

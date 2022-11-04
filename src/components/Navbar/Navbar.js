@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import "../Navbar/navbar.css";
 import { Link } from "react-router-dom";
 
-
 function Navbar() {
-   const [user, setUSer] = useState(null);
+   const [user] = useState(null);
    return (
       <div>
          <nav className="navbar-container">
@@ -15,7 +14,7 @@ function Navbar() {
             {user ? (
                <>
                   <p className="navbar-user">
-                     Hi, <span>  </span>{" "}
+                     Hi, <span> {user} </span>{" "}
                   </p>
                   <Link to="/logout" className="navbar-logout">
                      {" "}
