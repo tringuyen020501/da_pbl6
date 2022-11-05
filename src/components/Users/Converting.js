@@ -49,8 +49,8 @@ function Converting() {
       }
 
       axios({
-         url: "http://pi.tuongnh.tech:8000/extract",
-         method: "post",
+         url: "http://pi.tuongnh.tech:8000/extract/",
+         method: "POST",
          headers: {
             "Content-Type": "multipart/form-data",
          },

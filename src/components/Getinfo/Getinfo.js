@@ -10,7 +10,7 @@ function Getinfo() {
       owner: info?.owner,
       landNumber: info?.land_number,
       area: info?.area,
-      user: info?.user,
+      uses: info?.uses,
       note: info?.Note,
    });
 
@@ -19,7 +19,7 @@ function Getinfo() {
          owner: info?.owner,
          landNumber: info?.land_number,
          area: info?.area,
-         uses: info?.users,
+         uses: info?.uses,
          note: info?.Note,
       });
    }, [info]);
@@ -35,21 +35,31 @@ function Getinfo() {
    return (
       <div>
          <TextField
+            sx={{ marginRight: 1 }}
             label="Owner"
             name={"owner"}
             value={user?.owner}
             onChange={handleChange}
          />
          <TextField
+            sx={{ marginRight: 1 }}
             label="Land Number"
             name={"landNumber"}
             value={user?.landNumber}
             onChange={handleChange}
          />
          <TextField
+            sx={{ marginRight: 1 }}
             label="Area"
             name={"area"}
             value={user?.area}
+            onChange={handleChange}
+         />
+         <TextField
+            sx={{ marginRight: 1 }}
+            label="Uses"
+            name={"uses"}
+            value={user?.uses}
             onChange={handleChange}
          />
          <TextField
@@ -58,16 +68,12 @@ function Getinfo() {
             value={user?.note}
             onChange={handleChange}
          />
-
-         <TextField
-            label="uses"
-            name="uses"
-            value={info?.uses}
-            onChange={handleChange}
-         />
          <br />
-
-         <Button variant="contained" sx={{ marginTop: 3 }} onClick={handleSave}>
+         <Button
+            variant="contained"
+            sx={{ marginTop: 3, width: 100 }}
+            onClick={handleSave}
+         >
             Save
          </Button>
       </div>
