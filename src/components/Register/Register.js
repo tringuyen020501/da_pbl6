@@ -93,7 +93,7 @@ function Register() {
                            />
                         </Grid>
 
-                        {/* <Grid item xs={12}>
+                        <Grid item xs={12}>
                            <TextField
                               type="text"
                               fullWidth
@@ -101,10 +101,13 @@ function Register() {
                               placeholder="UserName"
                               variant="outlined"
                               onChange={(e) =>
-                              setValues({...values, username: e.target.value})}
-                              
+                                 setValues({
+                                    ...values,
+                                    username: e.target.value,
+                                 })
+                              }
                            />
-                        </Grid> */}
+                        </Grid>
                         <Grid item xs={12}>
                            <TextField
                               type="passWord"

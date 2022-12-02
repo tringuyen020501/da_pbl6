@@ -14,25 +14,51 @@ import React, { useState } from "react";
 import axios from "axios";
 // import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+// import { fetchToken, setToken } from "./Auth";
 // import { loginUser } from "../Redux/apiRequest";
 
 function Login() {
-
-   const navigate= useNavigate();
+   const navigate = useNavigate();
    const [values, setValues] = useState({
       email: "",
       pass: "",
       showPass: false,
    });
+   // const handleSubmit = (e) => {
+   //    e.preventDefault();
+   //    axios
+   //       .post("https://reqres.in/api/login", {
+   //          email: values.email,
+   //          password: values.pass,
+   //       })
+   //       .then((res) => {
+   //          console.log(res.data.token, "res.data.token");
+   //          if (res.data.token) {
+   //             // setToken(res.data.token);
+   //             navigate("/");
+   //          }
+   //       })
+   //       .catch((err) => console.error(err));
+   // };
+
    const handleSubmit = (e) => {
       e.preventDefault();
-      axios
-         .post("https://reqres.in/api/login", {
-            email: values.email,
-            password: values.pass,
+      axios({
+         url: "http://pi.tuongnh.tech:8000/user/",
+         methoad: "POST",
+         header: {
+            "Content-Type": "multipart/form-data",
+         },
+         email: values.email,
+         password: values.pass,
+      })
+         .then((res) => {
+            console.log(res.data.token, "res.data.token");
+            if (res.data.token) {
+               // setToken(res.data.token);
+               navigate("/");
+            }
          })
-         .then((res) => localStorage.setItem("token", res.data.token))
-         .then((res) =>navigate("/"))
          .catch((err) => console.error(err));
    };
 
@@ -41,7 +67,7 @@ function Login() {
    //    const newUser ={
    //       email: values.email,
    //       password: values.pass,
-      
+
    //    };
    //    loginUser(newUser, dispatch, navigate);
    // }
@@ -73,8 +99,12 @@ function Login() {
                               label="Email Address"
                               placeholder="Email Address"
                               variant="outlined"
-                              onChange={(e) =>
-                                 setValues({ ...values, email: e.target.value })
+                              onChange={
+                                 (e) =>
+                                    setValues({
+                                       ...values,
+                                       email: e.target.value,
+                                    })
                                  // setValues({ email: e.target.value })
                               }
                            />
@@ -87,8 +117,12 @@ function Login() {
                               label="Password"
                               placeholder="Password"
                               variant="outlined"
-                              onChange={(e) =>
-                                 setValues({ ...values, pass: e.target.value })
+                              onChange={
+                                 (e) =>
+                                    setValues({
+                                       ...values,
+                                       pass: e.target.value,
+                                    })
                                  // setValues({  pass: e.target.value })
                               }
                               InputProps={{

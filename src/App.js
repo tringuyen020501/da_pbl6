@@ -1,13 +1,14 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
-import Converting from "./components/Users/Converting.js";
+import Converting from "./components/Converting/Converting.js";
 import Login from "./components/Login/Login.js";
 import Register from "./components/Register/Register.js";
-import Navbar from "./components/Navbar/Navbar";
+// import Navbar from "./components/Navbar/Navbar";
 import Loading from "./components/Loading/Loading";
 import Processtepper from "./components/Stepper/Processtepper";
 import { createContext, useState } from "react";
 import Getinfo from "./components/Getinfo/Getinfo";
+import Menu from "./components/Admin/Menu";
 
 export const AppContext = createContext(null);
 export const UserContext = createContext(null);
@@ -33,8 +34,8 @@ function App() {
       <AppProvider>
          <UserProvider>
             <div className="App">
-               <Navbar />
-               <br />
+               {/* <Navbar />
+               <br /> */}
                <Routes>
                   <Route path="/" element={<Processtepper />}></Route>
                   <Route path="/info" element={<Getinfo />}></Route>
@@ -42,6 +43,13 @@ function App() {
                   <Route path="/login" element={<Login />}></Route>
                   <Route path="/register" element={<Register />}></Route>
                   <Route path="/loading" element={<Loading />}></Route>
+                  <Route
+                     path="/admin"
+                     element={<Menu />}
+                     render={() => {
+                        return;
+                     }}
+                  ></Route>
                </Routes>
             </div>
          </UserProvider>

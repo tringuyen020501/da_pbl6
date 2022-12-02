@@ -13,25 +13,25 @@ function Converting() {
    const [, setActiveStep] = useContext(AppContext);
    const [, setUser] = useContext(UserContext);
 
-   const handleSubmit = () => {
-      setIsLoading(true);
-      Tesseract.recognize(image, "vie", {
-         logger: (m) => {
-            console.log(m);
-            if (m.status === "recognizing text") {
-               setProgress(parseInt(m.progress * 100));
-            }
-         },
-      })
-         .catch((err) => {
-            console.error(err);
-         })
-         .then((result) => {
-            console.log(result.data);
-            setText(result.data.text);
-            setIsLoading(false);
-         });
-   };
+   // const handleSubmit = () => {
+   //    setIsLoading(true);
+   //    Tesseract.recognize(image, "vie", {
+   //       logger: (m) => {
+   //          console.log(m);
+   //          if (m.status === "recognizing text") {
+   //             setProgress(parseInt(m.progress * 100));
+   //          }
+   //       },
+   //    })
+   //       .catch((err) => {
+   //          console.error(err);
+   //       })
+   //       .then((result) => {
+   //          console.log(result.data);
+   //          setText(result.data.text);
+   //          setIsLoading(false);
+   //       });
+   // };
    const handleUpload = (e) => {
       e.preventDefault();
 
