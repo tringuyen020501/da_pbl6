@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useContext } from "react";
-import Tesseract from "tesseract.js";
 import { AppContext, UserContext } from "../../App";
 import "../../index.css";
 

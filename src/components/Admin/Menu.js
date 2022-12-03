@@ -1,5 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
-import { UserContext } from "../../App";
+import React, { useState, useEffect } from "react";
 import {
    Button,
    Card,
@@ -10,26 +9,33 @@ import {
    Row,
    Table,
 } from "react-bootstrap";
-// import { Toggle } from "rsuite";
 import Toggle from "rsuite/Toggle";
 import "../Admin/menu.css";
 import { FaPencilAlt, FaPlus, FaTrashAlt } from "react-icons/fa";
 
 function Menu() {
+   useEffect(() => {
+      fetch("http://pi.tuongnh.tech:8000/user/")
+         .then((res) => res.json())
+         .then((users) => {
+            setUsers(users);
+         });
+      console.log(users);
+   }, []);
+
    const initCurrentUser = {
-      id: null,
       username: "",
       email: "",
       fullname: "",
       role: "",
       password: "",
    };
-   const [info] = useContext(UserContext);
+
    const [show, setShow] = useState(false);
    const [newUser, setNewUser] = useState(initCurrentUser);
    const [showCreateBtn, setShowCreateBtn] = useState(true);
    const [editing, setEdit] = useState(false);
-   const [user, setUser] = useState({});
+   const [users, setUsers] = useState({});
 
    const handleClose = () => {
       setShow(false);
@@ -42,16 +48,18 @@ function Menu() {
    };
 
    const onFormSubmit = (newUser) => {
-      const id = user.length + 1;
-      setUser([...user, { ...newUser, id }]);
+      const username = users.length + 1;
+      setUsers([...users, { ...newUser, username }]);
    };
 
    const onEdit = (newUser) => {
       setEdit(true);
-      if (editing === true) {
-         setNewUser({ ...newUser, newUser });
-         handleShow();
-      }
+      setShow(true);
+      setNewUser(newUser);
+      // if (editing == true) {
+      //    setNewUser({ ...newUser, newUser });
+      //    handleShow();
+      // }
    };
 
    const onSubmit = (newUser) => {
@@ -64,13 +72,17 @@ function Menu() {
 
    const onUpdateUser = (newUser) => {
       setEdit(false);
-      let id = newUser.id;
-      setUser(user.map((i) => (i.id === id ? newUser : i)));
+      let username = newUser.username;
+      setUsers(users.map((i) => (i.username === username ? newUser : i)));
    };
 
    const onDeleteUser = (currentUser) => {
-      setUser(user.filter((i) => i.id !== currentUser.id));
+      // setUsers(users.filter((i) => i.id !== currentUser.id));
+      setUsers((users) => {
+         return users.filter((i) => i.username !== currentUser.username);
+      });
    };
+
    return (
       <div className="Menu">
          <header className="Menu-header">
@@ -110,23 +122,21 @@ function Menu() {
                         <Table striped bordered hover variant="dark">
                            <thead>
                               <tr>
-                                 <th>#</th>
                                  <th>username</th>
                                  <th>email</th>
                                  <th>fullname</th>
                                  <th>role</th>
-                                 <th>password</th>
+                                 {/* <th>password</th> */}
                               </tr>
                            </thead>
                            <tbody>
-                              {user.length > 0 ? (
-                                 user.map((user, index) => (
+                              {users.length > 0 ? (
+                                 users.map((user, index) => (
                                     <tr key={index}>
                                        <td>{user.username}</td>
                                        <td>{user.email}</td>
                                        <td>{user.fullname}</td>
                                        <td>{user.role}</td>
-                                       <td>{user.password}</td>
 
                                        <td>
                                           <Button
@@ -191,6 +201,7 @@ function Menu() {
                                  placeholder="Enter Name"
                               />
                            </Form.Group>
+
                            <Form.Group
                               className="mb-3"
                               controlId="formBasicAddress"
@@ -208,13 +219,14 @@ function Menu() {
                                  placeholder="Enter email"
                               />
                            </Form.Group>
+
                            <Form.Group
                               className="mb-3"
-                              controlId="formBasicAge"
+                              controlId="formBasicfullName"
                            >
                               <Form.Label>fullname</Form.Label>
                               <Form.Control
-                                 type="number"
+                                 type="text"
                                  value={newUser.fullname}
                                  onChange={(e) =>
                                     setNewUser({
@@ -290,7 +302,7 @@ function Menu() {
                            ) : (
                               <Button
                                  variant="primary"
-                                 disabled={!newUser.owner}
+                                 disabled={!newUser.username}
                                  type="submit"
                                  onClick={handleClose}
                               >
