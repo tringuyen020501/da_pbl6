@@ -31,6 +31,10 @@ function Navbar() {
                      {" "}
                      Register
                   </Link>
+                  <Link to="/admin" className="navbar-register">
+                     {" "}
+                     Admin
+                  </Link>
                </>
             )}
          </nav>

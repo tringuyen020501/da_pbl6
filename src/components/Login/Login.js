@@ -20,7 +20,7 @@ import { useNavigate } from "react-router-dom";
 function Login() {
    const navigate = useNavigate();
    const [values, setValues] = useState({
-      email: "",
+      username: "",
       pass: "",
       showPass: false,
    });
@@ -28,7 +28,7 @@ function Login() {
    //    e.preventDefault();
    //    axios
    //       .post("https://reqres.in/api/login", {
-   //          email: values.email,
+   //          username: values.username,
    //          password: values.pass,
    //       })
    //       .then((res) => {
@@ -49,7 +49,7 @@ function Login() {
          header: {
             "Content-Type": "multipart/form-data",
          },
-         email: values.email,
+         username: values.username,
          password: values.pass,
       })
          .then((res) => {
@@ -65,7 +65,7 @@ function Login() {
    // const handleSubmit = (e) => {
    //    e.preventDefault();
    //    const newUser ={
-   //       email: values.email,
+   //       username: values.username,
    //       password: values.pass,
 
    //    };
@@ -94,18 +94,18 @@ function Login() {
                      <Grid container direction="column" spacing={2}>
                         <Grid item>
                            <TextField
-                              type="email"
+                              type="text"
                               fullWidth
-                              label="Email Address"
-                              placeholder="Email Address"
+                              label="username "
+                              placeholder="username Address"
                               variant="outlined"
                               onChange={
                                  (e) =>
                                     setValues({
                                        ...values,
-                                       email: e.target.value,
+                                       username: e.target.value,
                                     })
-                                 // setValues({ email: e.target.value })
+                                 // setValues({ username: e.target.value })
                               }
                            />
                         </Grid>
