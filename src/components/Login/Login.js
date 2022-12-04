@@ -44,7 +44,7 @@ function Login() {
    const handleSubmit = (e) => {
       e.preventDefault();
       axios({
-         url: "http://pi.tuongnh.tech:8000/user/",
+         url: "https://pbl6.tuongnh.tech/auth/",
          methoad: "POST",
          header: {
             "Content-Type": "multipart/form-data",
