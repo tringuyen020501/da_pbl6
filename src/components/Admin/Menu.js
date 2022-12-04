@@ -15,7 +15,7 @@ import { FaPencilAlt, FaPlus, FaTrashAlt } from "react-icons/fa";
 
 function Menu() {
    useEffect(() => {
-      fetch("http://pi.tuongnh.tech:8000/user/")
+      fetch("https://pbl6.tuongnh.tech/user/")
          .then((res) => res.json())
          .then((users) => {
             setUsers(users);
