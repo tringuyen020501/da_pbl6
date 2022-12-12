@@ -11,66 +11,50 @@ import {
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import React, { useState } from "react";
-import axios from "axios";
-// import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-// import { fetchToken, setToken } from "./Auth";
-// import { loginUser } from "../Redux/apiRequest";
+import "../../App.css";
 
 function Login() {
    const navigate = useNavigate();
    const [values, setValues] = useState({
       username: "",
-      pass: "",
+      password: "",
       showPass: false,
    });
-   // const handleSubmit = (e) => {
-   //    e.preventDefault();
-   //    axios
-   //       .post("https://reqres.in/api/login", {
-   //          username: values.username,
-   //          password: values.pass,
-   //       })
-   //       .then((res) => {
-   //          console.log(res.data.token, "res.data.token");
-   //          if (res.data.token) {
-   //             // setToken(res.data.token);
-   //             navigate("/");
-   //          }
-   //       })
-   //       .catch((err) => console.error(err));
-   // };
-
    const handleSubmit = (e) => {
       e.preventDefault();
-      axios({
-         url: "https://pbl6.tuongnh.tech/auth/",
-         methoad: "POST",
-         header: {
-            "Content-Type": "multipart/form-data",
-         },
-         username: values.username,
-         password: values.pass,
-      })
-         .then((res) => {
-            console.log(res.data.token, "res.data.token");
-            if (res.data.token) {
-               // setToken(res.data.token);
-               navigate("/");
+      var myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+
+      var urlencoded = new URLSearchParams();
+      urlencoded.append("username", values.username);
+      urlencoded.append("password", values.password);
+
+      var requestOptions = {
+         method: "POST",
+         headers: myHeaders,
+         body: urlencoded,
+         redirect: "follow",
+      };
+
+      fetch("https://pbl6.tuongnh.tech/auth/", requestOptions)
+         .then((response) => {
+            if (response.ok) {
+               return response.json();
             }
+
+            throw Error(response.status);
          })
-         .catch((err) => console.error(err));
+         .then((result) => {
+            console.log(result);
+            localStorage.setItem("access_token", result.access_token);
+            navigate("/admin");
+         })
+         .catch((error) => {
+            console.log("error", error);
+            alert("username, password are wrong");
+         });
    };
-
-   // const handleSubmit = (e) => {
-   //    e.preventDefault();
-   //    const newUser ={
-   //       username: values.username,
-   //       password: values.pass,
-
-   //    };
-   //    loginUser(newUser, dispatch, navigate);
-   // }
 
    const handlePass = () => {
       setValues({
@@ -80,7 +64,10 @@ function Login() {
    };
 
    return (
-      <div>
+      <div className="Menu">
+         <header className="Menu-header">
+            <h1 className="Menu-title">Login</h1>
+         </header>
          <Container maxWidth="sm">
             <Grid
                container
@@ -117,13 +104,11 @@ function Login() {
                               label="Password"
                               placeholder="Password"
                               variant="outlined"
-                              onChange={
-                                 (e) =>
-                                    setValues({
-                                       ...values,
-                                       pass: e.target.value,
-                                    })
-                                 // setValues({  pass: e.target.value })
+                              onChange={(e) =>
+                                 setValues({
+                                    ...values,
+                                    password: e.target.value,
+                                 })
                               }
                               InputProps={{
                                  endAdornment: (

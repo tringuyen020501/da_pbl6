@@ -9,6 +9,7 @@ import Processtepper from "./components/Stepper/Processtepper";
 import { createContext, useState } from "react";
 import Getinfo from "./components/Getinfo/Getinfo";
 import Menu from "./components/Admin/Menu";
+import User from "./components/User/User";
 
 export const AppContext = createContext(null);
 export const UserContext = createContext(null);
@@ -37,19 +38,13 @@ function App() {
                {/* <Navbar />
                <br /> */}
                <Routes>
-                  <Route path="/" element={<Processtepper />}></Route>
+                  <Route path="/process" element={<Processtepper />}></Route>
                   <Route path="/info" element={<Getinfo />}></Route>
                   <Route path="/Converting" element={<Converting />}></Route>
-                  <Route path="/login" element={<Login />}></Route>
-                  <Route path="/register" element={<Register />}></Route>
+                  <Route path="/" element={<Login />}></Route>
                   <Route path="/loading" element={<Loading />}></Route>
-                  <Route
-                     path="/admin"
-                     element={<Menu />}
-                     render={() => {
-                        return;
-                     }}
-                  ></Route>
+                  <Route path="/admin" element={<Menu />}></Route>
+                  <Route path="/user" element={<User />}></Route>
                </Routes>
             </div>
          </UserProvider>
