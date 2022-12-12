@@ -155,24 +155,9 @@ function User() {
                                           <td>{user.profession}</td>
                                           <td>{user.interestRate}</td>
                                           <td>
-                                             <Link to="/admin" underline="none">
+                                             <Link to="#" underline="none">
                                                 <BiCommentDetail />
                                              </Link>
-
-                                             {/* <Button
-                                          variant="info"
-                                          title="Edit user details"
-                                          onClick={() => onEdit(user)}
-                                       >
-                                          <FaPencilAlt />
-                                       </Button>{" "}
-                                       <Button
-                                          variant="danger"
-                                          title="Delete user"
-                                          onClick={() => onDeleteUser(user)}
-                                       >
-                                          <FaTrashAlt />
-                                       </Button> */}
                                           </td>
                                        </tr>
                                     ))
