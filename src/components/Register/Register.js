@@ -16,19 +16,7 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-// const label = { inputProps: { "aria-label": "Checkbox demo" } };
-
 function Register() {
-   // const [url, setUrl] = useState(
-   //    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWqDr1l-AlEfIK_Uj2LSeTUqOibf_dLjoluQ&usqp=CAU"
-   // );
-   // const [register, setRegister] = useForm();
-   // const[avatar, setAvatar] = useState("")
-
-   // const changeAvatar = (e) =>{
-   //    setUrl(URL.createObjectURL(e.target.files[0]));
-   // }
-
    const navigate = useNavigate();
    const [values, setValues] = useState({
       email: "",
