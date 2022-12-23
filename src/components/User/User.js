@@ -9,10 +9,8 @@ import {
    Row,
    Table,
 } from "react-bootstrap";
-import Toggle from "rsuite/Toggle";
-// import { FaPencilAlt, FaPlus, FaTrashAlt } from "react-icons/fa";
 import { BiCommentDetail } from "react-icons/bi";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { MdLogout } from "react-icons/md";
 import "../../App.css";
 
@@ -38,46 +36,6 @@ function User() {
          .catch((err) => console.log(err));
    }, []);
 
-   // const handleClose = () => {
-   //    setShow(false);
-   // };
-   // const handleShow = () => {
-   //    setShow(true);
-   //    if (editing === false) {
-   //       setNewUser(initCurrentUser);
-   //    }
-   // };
-
-   //    const onFormSubmit = (newUser) => {
-   //       const id = users.length + 1;
-   //       setUsers([...users, { ...newUser, id }]);
-   //    };
-
-   //    const onEdit = (newUser) => {
-   //       setEdit(true);
-   //       if (editing === true) {
-   //          setNewUser({ ...newUser, newUser });
-   //          handleShow();
-   //       }
-   //    };
-
-   //    const onSubmit = (newUser) => {
-   //       if (editing === true) {
-   //          onUpdateUser(newUser);
-   //       } else {
-   //          onFormSubmit(newUser);
-   //       }
-   //    };
-
-   //    const onUpdateUser = (newUser) => {
-   //       setEdit(false);
-   //       let id = newUser.id;
-   //       setUsers(users.map((i) => (i.id === id ? newUser : i)));
-   //    };
-
-   //    const onDeleteUser = (currentUser) => {
-   //       setUsers(users.filter((i) => i.id !== currentUser.id));
-   //    };
    const handleLogout = () => {
       localStorage.removeItem("access_token");
       navigate("/");
