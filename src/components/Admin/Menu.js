@@ -12,19 +12,10 @@ import {
 import Toggle from "rsuite/Toggle";
 import "../../App.css";
 import { FaPencilAlt, FaPlus, FaTrashAlt } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { MdLogout } from "react-icons/md";
 
 function Menu() {
-   // useEffect(() => {
-   //    fetch("https://pbl6.tuongnh.tech/user/")
-   //       .then((res) => res.json())
-   //       .then((users) => {
-   //          setUsers(users);
-   //       })
-   //       // console.log(users);
-   //       .catch((err) => console.log(err));
-   // }, []);
-
    const initCurrentUser = useState({
       username: "",
       email: "",
@@ -38,6 +29,7 @@ function Menu() {
    const [showCreateBtn, setShowCreateBtn] = useState(true);
    const [editing, setEdit] = useState(false);
    const [users, setUsers] = useState({});
+   const navigate = useNavigate();
 
    var myHeaders = new Headers();
    myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
@@ -54,7 +46,6 @@ function Menu() {
          .then((users) => {
             setUsers(users);
          })
-         // console.log(users);
          .catch((err) => console.log(err));
    }, []);
 
@@ -97,6 +88,11 @@ function Menu() {
       setUsers(users.map((i) => (i.username === username ? newUser : i)));
    };
 
+   const handleLogout = () => {
+      localStorage.removeItem("access_token");
+      navigate("/");
+   };
+
    const onDeleteUser = (currentUser) => {
       setUsers((users) => {
          // return users.filter((i) => i.username !== currentUser.username);
@@ -114,7 +110,6 @@ function Menu() {
          )
             .then((response) => {
                if (response.ok) {
-                  // return response.json();
                   return users.filter(
                      (i) => i.username !== currentUser.username
                   );
@@ -135,9 +130,6 @@ function Menu() {
    return (
       <div>
          <div className="Menu">
-            <Link to="/" className="navbar-login">
-               Logout
-            </Link>
             <header className="Menu-header">
                <h1 className="Menu-title">User Management System</h1>
             </header>
@@ -159,6 +151,7 @@ function Menu() {
                                        setShowCreateBtn(!showCreateBtn);
                                     }}
                                  />
+
                                  {showCreateBtn ? (
                                     <Button
                                        variant="primary"
@@ -168,7 +161,13 @@ function Menu() {
                                        <FaPlus />
                                     </Button>
                                  ) : (
-                                    ""
+                                    <Button
+                                       variant="primary"
+                                       onClick={handleLogout}
+                                       title=""
+                                    >
+                                       <MdLogout />
+                                    </Button>
                                  )}
                               </div>
                            </div>

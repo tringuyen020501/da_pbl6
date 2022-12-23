@@ -21,8 +21,10 @@ function Login() {
       password: "",
       showPass: false,
    });
+
    const handleSubmit = (e) => {
       e.preventDefault();
+
       var myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
 
@@ -42,12 +44,18 @@ function Login() {
             if (response.ok) {
                return response.json();
             }
-
             throw Error(response.status);
          })
-         .then((result) => {
-            console.log(result);
-            localStorage.setItem("access_token", result.access_token);
+         .then((values) => {
+            localStorage.setItem("access_token", values.access_token);
+            console.log(values);
+            // if(result.role==="1"){
+            //    navigate("/admin");
+
+            // }
+            // else(result.role==="0"){
+            //    navigate("/user");
+            // }
             navigate("/admin");
          })
          .catch((error) => {
