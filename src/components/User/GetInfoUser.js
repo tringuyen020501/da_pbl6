@@ -19,7 +19,7 @@ function GetInfoUser() {
       color: theme.palette.text.secondary,
    }));
 
-   useEffect(() => {
+   const list = useEffect(() => {
       var requestOptions = {
          method: "GET",
          redirect: "follow",
@@ -467,7 +467,7 @@ function GetInfoUser() {
    }, []);
    // const value = JSON.stringify(infos[0].data);
 
-   return <div></div>;
+   return <div>{list}</div>;
 }
 
 export default GetInfoUser;
