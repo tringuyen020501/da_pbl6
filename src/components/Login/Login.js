@@ -1,12 +1,20 @@
 import {
    Button,
-   Container,
    Grid,
    IconButton,
    InputAdornment,
    Paper,
    TextField,
 } from "@mui/material";
+import Box from "@mui/material/Box";
+import jwt_decode from "jwt-decode";
+
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Typography from "@mui/material/Typography";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import Avatar from "@mui/material/Avatar";
+import CssBaseline from "@mui/material/CssBaseline";
+import Link from "@mui/material/Link";
 
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
@@ -14,8 +22,28 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../App.css";
 
-function Login() {
+function Copyright(props) {
+   return (
+      <Typography
+         variant="body2"
+         color="text.secondary"
+         align="center"
+         {...props}
+      >
+         {"Copyright © "}
+         <Link color="inherit" href="">
+            SoDo
+         </Link>{" "}
+         {new Date().getFullYear()}
+         {"."}
+      </Typography>
+   );
+}
+const theme = createTheme();
+
+export default function Login() {
    const navigate = useNavigate();
+
    const [values, setValues] = useState({
       username: "",
       password: "",
@@ -24,7 +52,6 @@ function Login() {
 
    const handleSubmit = (e) => {
       e.preventDefault();
-
       var myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
 
@@ -46,17 +73,16 @@ function Login() {
             }
             throw Error(response.status);
          })
-         .then((values) => {
-            localStorage.setItem("access_token", values.access_token);
-            console.log(values);
-            // if(result.role==="1"){
-            //    navigate("/admin");
-
-            // }
-            // else(result.role==="0"){
-            //    navigate("/user");
-            // }
-            navigate("/admin");
+         .then((data) => {
+            localStorage.setItem("access_token", data.access_token);
+            const token = data.access_token;
+            const decoded = jwt_decode(token);
+            console.log(decoded);
+            if (decoded.role === 1) {
+               navigate("/admin");
+            } else if (decoded.role === 0) {
+               navigate("/user");
+            }
          })
          .catch((error) => {
             console.log("error", error);
@@ -72,84 +98,113 @@ function Login() {
    };
 
    return (
-      <div className="Menu">
-         <header className="Menu-header">
-            <h1 className="Menu-title">Login</h1>
-         </header>
-         <Container maxWidth="sm">
-            <Grid
-               container
-               spacing={2}
-               direction="column"
-               justifyContent="center"
-               style={{ minHeight: "100vh" }}
-            >
-               <Paper elevation={2} sx={{ padding: 5 }}>
-                  <form onSubmit={handleSubmit}>
-                     <Grid container direction="column" spacing={2}>
-                        <Grid item>
-                           <TextField
-                              type="text"
-                              fullWidth
-                              label="username "
-                              placeholder="username Address"
-                              variant="outlined"
-                              onChange={
-                                 (e) =>
-                                    setValues({
-                                       ...values,
-                                       username: e.target.value,
-                                    })
-                                 // setValues({ username: e.target.value })
-                              }
-                           />
-                        </Grid>
-
-                        <Grid item>
-                           <TextField
-                              type={values.showPass ? "text" : "password"}
-                              fullWidth
-                              label="Password"
-                              placeholder="Password"
-                              variant="outlined"
-                              onChange={(e) =>
-                                 setValues({
-                                    ...values,
-                                    password: e.target.value,
-                                 })
-                              }
-                              InputProps={{
-                                 endAdornment: (
-                                    <InputAdornment position="end">
-                                       <IconButton
-                                          onClick={handlePass}
-                                          aria-label="toggle password"
-                                          edge="end"
-                                       >
-                                          {values.showPass ? (
-                                             <VisibilityOffIcon />
-                                          ) : (
-                                             <VisibilityIcon />
-                                          )}
-                                       </IconButton>
-                                    </InputAdornment>
-                                 ),
-                              }}
-                           />
-                        </Grid>
-
-                        <Grid item>
-                           <Button type="submit" variant="contained" fullWidth>
-                              Sign In
-                           </Button>
-                        </Grid>
-                     </Grid>
-                  </form>
-               </Paper>
+      <div>
+         <ThemeProvider theme={theme}>
+            <Grid container component="main" sx={{ height: "100vh" }}>
+               <CssBaseline />
+               <Grid
+                  item
+                  xs={false}
+                  sm={4}
+                  md={7}
+                  sx={{
+                     backgroundImage: "url(https://source.unsplash.com/random)",
+                     backgroundRepeat: "no-repeat",
+                     backgroundColor: (t) =>
+                        t.palette.mode === "light"
+                           ? t.palette.grey[50]
+                           : t.palette.grey[900],
+                     backgroundSize: "cover",
+                     backgroundPosition: "center",
+                  }}
+               />
+               <Grid
+                  item
+                  xs={12}
+                  sm={8}
+                  md={5}
+                  component={Paper}
+                  elevation={6}
+                  square
+               >
+                  <Box
+                     sx={{
+                        my: 8,
+                        mx: 4,
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                     }}
+                  >
+                     <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+                        <LockOutlinedIcon />
+                     </Avatar>
+                     <Typography component="h1" variant="h5">
+                        Sign in to SODO Website
+                     </Typography>
+                     <Box
+                        component="form"
+                        noValidate
+                        onSubmit={handleSubmit}
+                        sx={{ mt: 1 }}
+                     >
+                        <TextField
+                           type="text"
+                           fullWidth
+                           label="UserName"
+                           placeholder="UserName"
+                           variant="outlined"
+                           onChange={(e) =>
+                              setValues({
+                                 ...values,
+                                 username: e.target.value,
+                              })
+                           }
+                        />
+                        <TextField
+                           type={values.showPass ? "text" : "password"}
+                           fullWidth
+                           label="Password"
+                           placeholder="Password"
+                           variant="outlined"
+                           onChange={(e) =>
+                              setValues({
+                                 ...values,
+                                 password: e.target.value,
+                              })
+                           }
+                           InputProps={{
+                              endAdornment: (
+                                 <InputAdornment position="end">
+                                    <IconButton
+                                       onClick={handlePass}
+                                       aria-label="toggle password"
+                                       edge="end"
+                                    >
+                                       {values.showPass ? (
+                                          <VisibilityOffIcon />
+                                       ) : (
+                                          <VisibilityIcon />
+                                       )}
+                                    </IconButton>
+                                 </InputAdornment>
+                              ),
+                           }}
+                        />
+                        <Button
+                           type="submit"
+                           fullWidth
+                           variant="contained"
+                           sx={{ mt: 3, mb: 2 }}
+                        >
+                           Sign In
+                        </Button>
+                        <Copyright sx={{ mt: 5 }} />
+                     </Box>
+                  </Box>
+               </Grid>
             </Grid>
-         </Container>
+         </ThemeProvider>
       </div>
    );
 }
-
-export default Login;

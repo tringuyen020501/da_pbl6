@@ -2,8 +2,6 @@ import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Converting from "./components/Converting/Converting.js";
 import Login from "./components/Login/Login.js";
-// import Register from "./components/Register/Register.js";
-// import Navbar from "./components/Navbar/Navbar";
 import Loading from "./components/Loading/Loading";
 import Processtepper from "./components/Stepper/Processtepper";
 import { createContext, useState } from "react";

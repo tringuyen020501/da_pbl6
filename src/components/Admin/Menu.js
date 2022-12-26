@@ -31,16 +31,19 @@ function Menu() {
    const [users, setUsers] = useState({});
    const navigate = useNavigate();
 
-   var myHeaders = new Headers();
-   myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
-
-   var requestOptionsGet = {
-      method: "GET",
-      headers: myHeaders,
-      redirect: "follow",
-   };
-
    useEffect(() => {
+      var myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+      myHeaders.append(
+         "Authorization",
+         `bearer ${localStorage.getItem("access_token")}`
+      );
+
+      var requestOptionsGet = {
+         method: "GET",
+         headers: myHeaders,
+         redirect: "follow",
+      };
       fetch("https://pbl6.tuongnh.tech/user/", requestOptionsGet)
          .then((res) => res.json())
          .then((users) => {

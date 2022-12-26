@@ -18,12 +18,18 @@ function User() {
    const [show, setShow] = useState(false);
    const navigate = useNavigate();
 
-   var requestOptions = {
-      method: "GET",
-      redirect: "follow",
-   };
-
    useEffect(() => {
+      var myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+      myHeaders.append(
+         "Authorization",
+         `bearer ${localStorage.getItem("access_token")}`
+      );
+      var requestOptions = {
+         method: "GET",
+         redirect: "follow",
+         headers: myHeaders,
+      };
       fetch(
          "https://pbl6.tuongnh.tech/clur/?page=2&num_per_page=3",
          requestOptions
@@ -43,9 +49,9 @@ function User() {
    return (
       <div>
          <div className="Menu">
-            <header className="Menu-header">
+            {/* <header className="Menu-header">
                <h1 className="Menu-title">User</h1>
-            </header>
+            </header> */}
             <Container fluid="md">
                <Row>
                   <Col>
