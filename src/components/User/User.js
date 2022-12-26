@@ -74,8 +74,8 @@ function User() {
                            <Table striped bordered hover variant="dark">
                               <thead>
                                  <tr>
-                                    <th>Created at</th>
                                     <th>Created by</th>
+                                    <th>Created at</th>
                                     <th>data</th>
                                  </tr>
                               </thead>
@@ -83,12 +83,7 @@ function User() {
                                  {users.length > 0 ? (
                                     users.map((user, index) => (
                                        <tr key={index}>
-                                          <td>
-                                             {user.created_by.username},
-                                             {user.created_by.email},
-                                             {user.created_by.fullname},
-                                             {user.created_by.role}
-                                          </td>
+                                          <td>{user.created_by.username}</td>
                                           <td>{user.created_at} </td>
                                           <td>
                                              <Button
