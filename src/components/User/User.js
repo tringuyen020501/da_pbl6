@@ -31,7 +31,7 @@ function User() {
          headers: myHeaders,
       };
       fetch(
-         "https://pbl6.tuongnh.tech/clur/?page=2&num_per_page=3",
+         "https://pbl6.tuongnh.tech/clur/?page=1&num_per_page=100",
          requestOptions
       )
          .then((res) => res.json())
