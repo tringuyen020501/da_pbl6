@@ -181,7 +181,7 @@ function Menu() {
                                     <th>username</th>
                                     <th>email</th>
                                     <th>fullname</th>
-                                    <th>role</th>
+                                    {/* <th>role</th> */}
                                     {/* <th>password</th> */}
                                  </tr>
                               </thead>
@@ -192,7 +192,7 @@ function Menu() {
                                           <td>{user.username}</td>
                                           <td>{user.email}</td>
                                           <td>{user.fullname}</td>
-                                          <td>{user.role}</td>
+                                          {/* <td>{user.role}</td> */}
 
                                           <td>
                                              <Button
