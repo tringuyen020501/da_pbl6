@@ -19,12 +19,13 @@ function GetInfoUser() {
       };
 
       fetch(
-         "https://pbl6.tuongnh.tech/clur/?page=3&num_per_page=4",
+         "https://pbl6.tuongnh.tech/clur/?page=1&num_per_page=100",
          requestOptions
       )
          .then((response) => response.json())
-         .then((infos) => {
-            setInfos(infos);
+         .then((data) => {
+            setInfos(data);
+            // console.log(data);
          })
          .catch((error) => console.log("error", error));
    }, []);
@@ -58,7 +59,7 @@ function GetInfoUser() {
                      readOnly: true,
                   }}
                   defaultValue={JSON.stringify(
-                     infos[0].data["Thông tin về chủ sở hữu"]["Chủ sở hữu"]
+                     infos[5].data["Thông tin về chủ sở hữu"]["Chủ sở hữu"]
                   ).replaceAll('"', "")}
                />
 
@@ -76,7 +77,7 @@ function GetInfoUser() {
                      readOnly: true,
                   }}
                   defaultValue={JSON.stringify(
-                     infos[0].data["Thông tin về chủ sở hữu"]["Năm sinh"]
+                     infos[5].data["Thông tin về chủ sở hữu"]["Năm sinh"]
                   ).replaceAll('"', "")}
                />
 
@@ -94,7 +95,7 @@ function GetInfoUser() {
                      readOnly: true,
                   }}
                   defaultValue={JSON.stringify(
-                     infos[0].data["Thông tin về chủ sở hữu"]["CMND số"]
+                     infos[5].data["Thông tin về chủ sở hữu"]["CMND số"]
                   ).replaceAll('"', "")}
                />
 
@@ -112,7 +113,7 @@ function GetInfoUser() {
                      readOnly: true,
                   }}
                   defaultValue={JSON.stringify(
-                     infos[0].data["Thông tin về chủ sở hữu"][
+                     infos[5].data["Thông tin về chủ sở hữu"][
                         "Địa chỉ thường trú"
                      ]
                   ).replaceAll('"', "")}
@@ -136,7 +137,7 @@ function GetInfoUser() {
                      readOnly: true,
                   }}
                   defaultValue={JSON.stringify(
-                     infos[0].data[
+                     infos[5].data[
                         "Thửa đất, nhà ở và tài sản khác gắn liền với đất"
                      ]["Số vào sổ cấp GCN"]
                   ).replaceAll('"', "")}
@@ -159,7 +160,7 @@ function GetInfoUser() {
                      readOnly: true,
                   }}
                   defaultValue={JSON.stringify(
-                     infos[0].data[
+                     infos[5].data[
                         "Thửa đất, nhà ở và tài sản khác gắn liền với đất"
                      ]["1. Thửa đất:"]["a) Thửa đất số"]
                   ).replaceAll('"', "")}
@@ -178,7 +179,7 @@ function GetInfoUser() {
                      readOnly: true,
                   }}
                   defaultValue={JSON.stringify(
-                     infos[0].data[
+                     infos[5].data[
                         "Thửa đất, nhà ở và tài sản khác gắn liền với đất"
                      ]["1. Thửa đất:"]["b) Địa chỉ"]
                   ).replaceAll('"', "")}
@@ -199,12 +200,12 @@ function GetInfoUser() {
                   }}
                   defaultValue={
                      JSON.stringify(
-                        infos[0].data[
+                        infos[5].data[
                            "Thửa đất, nhà ở và tài sản khác gắn liền với đất"
                         ]["1. Thửa đất:"]["c) Diện tích"]
                      ).replaceAll('"', "") +
                      " (" +
-                     infos[0].data[
+                     infos[5].data[
                         "Thửa đất, nhà ở và tài sản khác gắn liền với đất"
                      ]["1. Thửa đất:"]["(bằng chữ"]
                   }
@@ -224,7 +225,7 @@ function GetInfoUser() {
                      readOnly: true,
                   }}
                   defaultValue={JSON.stringify(
-                     infos[0].data[
+                     infos[5].data[
                         "Thửa đất, nhà ở và tài sản khác gắn liền với đất"
                      ]["1. Thửa đất:"]["d) Hình thức sử dụng"]
                   ).replaceAll('"', "")}
@@ -244,7 +245,7 @@ function GetInfoUser() {
                      readOnly: true,
                   }}
                   defaultValue={JSON.stringify(
-                     infos[0].data[
+                     infos[5].data[
                         "Thửa đất, nhà ở và tài sản khác gắn liền với đất"
                      ]["1. Thửa đất:"]["đ) Mục đích sử dụng"]
                   ).replaceAll('"', "")}
@@ -264,7 +265,7 @@ function GetInfoUser() {
                      readOnly: true,
                   }}
                   defaultValue={JSON.stringify(
-                     infos[0].data[
+                     infos[5].data[
                         "Thửa đất, nhà ở và tài sản khác gắn liền với đất"
                      ]["1. Thửa đất:"]["e) Thời hạn sử dụng"]
                   ).replaceAll('"', "")}
@@ -285,7 +286,7 @@ function GetInfoUser() {
                      readOnly: true,
                   }}
                   defaultValue={JSON.stringify(
-                     infos[0].data[
+                     infos[5].data[
                         "Thửa đất, nhà ở và tài sản khác gắn liền với đất"
                      ]["1. Thửa đất:"]["g) Nguồn gốc sử dụng"]
                   ).replaceAll('"', "")}
@@ -309,7 +310,7 @@ function GetInfoUser() {
                      readOnly: true,
                   }}
                   defaultValue={JSON.stringify(
-                     infos[0].data[
+                     infos[5].data[
                         "Thửa đất, nhà ở và tài sản khác gắn liền với đất"
                      ]["2. Nhà ở:"]
                   ).replaceAll('"', "")}
@@ -333,7 +334,7 @@ function GetInfoUser() {
                      readOnly: true,
                   }}
                   defaultValue={JSON.stringify(
-                     infos[0].data[
+                     infos[5].data[
                         "Thửa đất, nhà ở và tài sản khác gắn liền với đất"
                      ]["3. Công trình xây dựng khác:"]
                   ).replaceAll('"', "")}
@@ -357,7 +358,7 @@ function GetInfoUser() {
                      readOnly: true,
                   }}
                   defaultValue={JSON.stringify(
-                     infos[0].data[
+                     infos[5].data[
                         "Thửa đất, nhà ở và tài sản khác gắn liền với đất"
                      ]["4. Rừng sản xuất là rừng trồng:"]
                   ).replaceAll('"', "")}
@@ -381,7 +382,7 @@ function GetInfoUser() {
                      readOnly: true,
                   }}
                   defaultValue={JSON.stringify(
-                     infos[0].data[
+                     infos[5].data[
                         "Thửa đất, nhà ở và tài sản khác gắn liền với đất"
                      ]["5. Cây lâu năm:"]
                   ).replaceAll('"', "")}
@@ -405,7 +406,7 @@ function GetInfoUser() {
                      readOnly: true,
                   }}
                   defaultValue={JSON.stringify(
-                     infos[0].data[
+                     infos[5].data[
                         "Thửa đất, nhà ở và tài sản khác gắn liền với đất"
                      ]["6. Ghi chú:"]
                   ).replaceAll('"', "")}
@@ -429,7 +430,7 @@ function GetInfoUser() {
                      readOnly: true,
                   }}
                   defaultValue={JSON.stringify(
-                     infos[0].data[
+                     infos[5].data[
                         "Những thay đổi sau khi cấp giấy chứng nhận"
                      ]["Nội dung thay đổi"]
                   ).replaceAll('"', "")}
@@ -449,7 +450,7 @@ function GetInfoUser() {
                />
                <br />
                <img
-                  src={`data:image/png;base64,${infos[0].data["land_image"]}`}
+                  src={`data:image/png;base64,${infos[5].data["land_image"]}`}
                />
             </Box>
          ) : (
