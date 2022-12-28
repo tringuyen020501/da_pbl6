@@ -63,8 +63,8 @@ function Menu() {
    };
 
    const onFormSubmit = (newUser) => {
-      const username = users.length + 1;
-      setUsers([...users, { ...newUser, username }]);
+      const name = users.username;
+      setUsers([...users, { ...newUser, name }]);
    };
 
    const onEdit = (newUser) => {
@@ -99,29 +99,30 @@ function Menu() {
    const onDeleteUser = (currentUser) => {
       setUsers((users) => {
          // return users.filter((i) => i.username !== currentUser.username);
+         var myHeaders = new Headers();
+         myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+         myHeaders.append(
+            "Authorization",
+            `bearer ${localStorage.getItem("access_token")}`
+         );
          var urlencoded = new URLSearchParams();
 
          var requestOptionsDelete = {
             method: "DELETE",
             body: urlencoded,
             redirect: "follow",
+            headers: myHeaders,
          };
 
-         fetch(
-            `https://pbl6.tuongnh.tech/user/${users.username}`,
-            requestOptionsDelete
-         )
+         fetch(`https://pbl6.tuongnh.tech/user/`, requestOptionsDelete)
             .then((response) => {
-               if (response.ok) {
-                  return users.filter(
-                     (i) => i.username !== currentUser.username
-                  );
-               }
-               throw Error(response.status);
+               console.log(response);
             })
 
-            .then((result) => {
-               console.log(result);
+            .then((users) => {
+               console.log(
+                  users.filter((i) => i.username !== currentUser.username)
+               );
             })
             .catch((error) => {
                console.log("error", error);
