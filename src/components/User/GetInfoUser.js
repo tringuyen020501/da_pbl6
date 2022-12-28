@@ -34,7 +34,7 @@ function GetInfoUser() {
             <Box
                component="form"
                sx={{
-                  "& .MuiTextField-root": { m: 1, width: "70ch" },
+                  "& .MuiTextField-root": { m: 1, width: "65ch" },
                }}
                noValidate
                autoComplete="off"
